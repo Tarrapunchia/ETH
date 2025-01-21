@@ -58,10 +58,11 @@ contract Crowfunding {
         address public usdcTokenAddress;
 
         // mapping per campagne multiple
-        mapping(uint256 => Campaign) Campaigns;
+        mapping(uint256 => Campaign) public Campaigns;
 
     /// CONTRUCTOR
-        constructor(uint256 _minGoalToCollect, address _adminCampaign, uint256 _endTime) {
+        constructor(address _usdcTokenAddress) {
+            usdcTokenAddress = _usdcTokenAddress;
             // adminCampaign = _adminCampaign;
             // minGoalToCollect = _minGoalToCollect;
             // campaingEndTime = _endTime;
