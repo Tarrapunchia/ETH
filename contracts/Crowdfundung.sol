@@ -114,9 +114,9 @@ contract Crowfunding {
         }
 
         // Prelievo dei soldi da parte dell'admin quando sono stati raggiunti gli obiettivi economici && di tempo
-        function claimFunds() public payable {
-            if (msg.sender != adminCampaign)
-                revert NotAdmin();
+        function claimFunds() public payable onlyAdmin{
+            // if (msg.sender != adminCampaign)
+            //     revert NotAdmin();
             if (collectedFunds < minGoalToCollect)
                 revert GoalNotReached();
             if (block.timestamp < campaingEndTime)
@@ -146,6 +146,17 @@ contract Crowfunding {
         }
 
     /// MODIFIERS
+        // sono una kw di solidity al cui intero va una logica
+        modifier onlyAdmin() {
+            if (msg.sender != adminCampaign)
+                revert NotAdmin();
+            _;
+        // il modificatore deve terminare con _;
+        }
+        // questi poi vanno messi nella dichiarazione di metodo in questa maniera
+        // function nomeMetodo() public payable nomeModificatore {...}
+        // questo fa si che il controllo dentro il mod avvenga in autmatco alla chiamata di fne
+        // (VEDERE CLAIMFUNDS())
 
 
 
